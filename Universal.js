@@ -23,11 +23,13 @@ var sections = [
 
 var script = document.currentScript;
 
+var width = parseInt(script.getAttribute("data-width"));
+var height = parseInt(script.getAttribute("data-height"));
+
 var banner = document.createElement("div");
 
-banner.style.width = script.getAttribute("data-width") || "100%";
-banner.style.height = script.getAttribute("data-height") || "100%";
-
+banner.style.width = width + "px";
+banner.style.height = height + "px";
 banner.style.position = "relative";
 banner.style.overflow = "hidden";
 banner.style.fontFamily = "Arial";
@@ -39,8 +41,7 @@ banner.onclick = function(){
 window.open(clickUrl,"_blank");
 };
 
-var width = banner.offsetWidth;
-var height = banner.offsetHeight;
+/* BAGGRUNDSBILLEDE */
 
 var img = document.createElement("img");
 
@@ -53,6 +54,8 @@ img.style.transition = "filter 3s ease";
 
 banner.appendChild(img);
 
+/* OVERLAY */
+
 var overlay = document.createElement("div");
 
 overlay.style.position = "absolute";
@@ -64,6 +67,8 @@ overlay.style.opacity = "0";
 overlay.style.transition = "opacity 3s ease";
 
 banner.appendChild(overlay);
+
+/* TEKSTCONTAINER */
 
 var container = document.createElement("div");
 
@@ -78,20 +83,52 @@ container.style.transition =
 
 banner.appendChild(container);
 
+/* FORMAT-TILPASNING */
+
+var labelSize;
+var wordSize;
+
+if(width >= 1500){
+
+labelSize = 36;
+wordSize = 120;
+
+}
+
+else if(width >= 900){
+
+labelSize = 26;
+wordSize = 70;
+
+}
+
+else{
+
+labelSize = 14;
+wordSize = 30;
+
+}
+
+/* FAGSEKTION */
+
 var label = document.createElement("div");
 
 label.innerText = "Fagsektion";
-label.style.fontSize = (width/40) + "px";
+label.style.fontSize = labelSize + "px";
 label.style.color = "#153F78";
+
+/* ORD */
 
 var word = document.createElement("div");
 
-word.style.fontSize = (width/10) + "px";
+word.style.fontSize = wordSize + "px";
 word.style.fontWeight = "bold";
 word.style.whiteSpace = "nowrap";
 
 container.appendChild(label);
 container.appendChild(word);
+
+/* ANIMATION */
 
 var index = 0;
 
@@ -128,7 +165,7 @@ setTimeout(function(){
 container.style.opacity = "1";
 
 container.style.transform =
-"translate(-50%, -50%) scale(1.7)";
+"translate(-50%, -50%) scale(1.6)";
 
 word.style.color = "#153F78";
 
