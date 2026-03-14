@@ -1,2 +1,2 @@
-# universal
-Universal banner
+# responsiv
+responsiv banner
